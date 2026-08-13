@@ -1,0 +1,21 @@
+{
+  "name": "vehicle-rental-mvp",
+  "version": "1.0.0",
+  "description": "Vehicle Rental System MVP",
+  "main": "server.js",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "reset-db": "node scripts/resetDatabase.js"
+  }
+}

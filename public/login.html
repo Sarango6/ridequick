@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RideRent</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <div class="logo">Ride<span>Rent</span></div>
+        <h1>Welcome back</h1>
+        <p class="muted">Login to continue.</p>
+        <form id="loginForm">
+            <input id="email" type="email" placeholder="Email" required>
+            <input id="password" type="password" placeholder="Password" required>
+            <button class="btn btn-primary full" type="submit">Login</button>
+            <p id="loginMessage" class="form-message"></p>
+        </form>
+        <p class="auth-footer">Don't have an account? <a href="register.html">Create account</a></p>
+        <p class="auth-footer"><a href="index.html">Back to home</a></p>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideRent - Vehicle Rental</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Ride<span>Rent</span></div>
+        <nav>
+            <a href="/">Vehicles</a>
+            <a href="dashboard.html" data-auth-state="authed">Dashboard</a>
+            <a href="booking.html" data-auth-state="authed">Bookings</a>
+            <a href="register.html" data-auth-state="guest">List Your Vehicle</a>
+        </nav>
+        <div class="nav-actions">
+            <span class="nav-user hidden" data-auth-state="authed" data-user-name></span>
+            <a class="btn btn-outline" href="login.html" data-auth-state="guest">Login</a>
+            <a class="btn btn-primary" href="register.html" data-auth-state="guest">Register</a>
+            <button class="btn btn-dark hidden" data-auth-state="authed" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">One account. Two actions.</span>
+            <h1>Rent vehicles. <span>List your vehicle.</span> One account.</h1>
+            <p>Rent bikes, cars, scooties and EVs from local users - or list your own vehicle and earn from it.</p>
+            <div class="hero-actions">
+                <a href="#vehicles" class="btn btn-primary btn-large">Browse Vehicles</a>
+                <a href="register.html" class="btn btn-outline btn-large">List Your Vehicle</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="vehicles">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">AVAILABLE NOW</span>
+                <h2>Choose your vehicle</h2>
+            </div>
+            <select id="filterType" aria-label="Filter vehicle type">
+                <option value="All">All Vehicles</option>
+                <option value="Bike">Bike</option>
+                <option value="Car">Car</option>
+                <option value="Scooty">Scooty</option>
+                <option value="EV">EV</option>
+            </select>
+        </div>
+        <div id="vehicleGrid" class="vehicle-grid">
+            <div class="loading">Loading vehicles...</div>
+        </div>
+    </section>
+
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

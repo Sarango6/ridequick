@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RideRent</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Ride<span>Rent</span></div>
+        <nav>
+            <a href="/">Vehicles</a>
+            <a href="booking.html">Bookings</a>
+            <a href="dashboard.html" data-auth-state="authed">My Dashboard</a>
+            <a href="#addVehicle">Add Vehicle</a>
+        </nav>
+        <div class="nav-actions">
+            <span class="nav-user hidden" data-auth-state="authed" data-user-name></span>
+            <a class="btn btn-outline" href="login.html" data-auth-state="guest">Login</a>
+            <a class="btn btn-primary" href="register.html" data-auth-state="guest">Register</a>
+            <button class="btn btn-dark hidden" data-auth-state="authed" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <section class="dashboard-header">
+            <span class="eyebrow">MY DASHBOARD</span>
+            <h1 id="welcomeName">Welcome</h1>
+            <p class="muted">Manage your vehicles and rentals in one place.</p>
+        </section>
+
+        <section id="ownerSection" class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">MY VEHICLES</span>
+                    <h2>Vehicles you have listed for rent</h2>
+                </div>
+                <a class="btn btn-primary" href="#addVehicle">+ Add Vehicle</a>
+            </div>
+
+            <div class="add-vehicle-card" id="addVehicle">
+                <form id="vehicleForm">
+                    <div class="form-grid">
+                        <select id="vehicleType" required aria-label="Vehicle type">
+                            <option value="">Vehicle Type</option>
+                            <option value="Bike">Bike</option>
+                            <option value="Car">Car</option>
+                            <option value="Scooty">Scooty</option>
+                            <option value="EV">EV</option>
+                        </select>
+                        <input id="brand" type="text" placeholder="Brand" required>
+                        <input id="model" type="text" placeholder="Model" required>
+                        <input id="vehicleNumber" type="text" placeholder="Vehicle Number" required>
+                        <input id="chargesPerHour" type="number" min="1" placeholder="Charges Per Hour" required>
+                        <input id="imageUrl" type="url" placeholder="Image URL" required>
+                    </div>
+                    <textarea id="description" placeholder="Description"></textarea>
+                    <button class="btn btn-primary" type="submit">Add Vehicle</button>
+                    <p id="vehicleMessage" class="form-message"></p>
+                </form>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">MY VEHICLES</span>
+                    <h2>My Vehicles</h2>
+                </div>
+            </div>
+            <div id="ownerVehicles" class="vehicle-grid"></div>
+
+            <div class="section-heading section-heading-spaced">
+                <div>
+                    <span class="eyebrow">RENTAL REQUESTS</span>
+                    <h2>Rental Requests for My Vehicles</h2>
+                </div>
+            </div>
+            <div id="ownerBookings"></div>
+
+            <div class="section-heading section-heading-spaced">
+                <div>
+                    <span class="eyebrow">MY RENTALS</span>
+                    <h2>Vehicles you have booked from other users</h2>
+                </div>
+            </div>
+            <div id="myBookings"></div>
+        </section>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
