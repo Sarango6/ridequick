@@ -7,21 +7,40 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
     try {
-        console.log("REGISTER BODY:", req.body);
+        console.log("REGISTER BODY:", {
+            ...req.body,
+            password: req.body.password ? "[hidden]" : undefined
+        });
+
         const {
             name,
             email,
             phone,
-            password
+            licenseNumber,
+            password,
+            termsAccepted
         } = req.body;
-      
+
         const normalizedName = String(name || "").trim();
         const normalizedEmail = String(email || "").trim().toLowerCase();
         const normalizedPhone = String(phone || "").trim();
+        const normalizedLicenseNumber = String(licenseNumber || "").trim();
 
-        if (!normalizedName || !normalizedEmail || !normalizedPhone || !password) {
+        if (
+            !normalizedName ||
+            !normalizedEmail ||
+            !normalizedPhone ||
+            !normalizedLicenseNumber ||
+            !password
+        ) {
             return res.status(400).json({
                 message: "All fields are required"
+            });
+        }
+
+        if (!termsAccepted) {
+            return res.status(400).json({
+                message: "You must accept the Terms & Conditions"
             });
         }
 
@@ -31,11 +50,23 @@ router.post("/register", async (req, res) => {
             });
         }
 
-        const existingUser = await User.findOne({ email: normalizedEmail });
+        const existingEmail = await User.findOne({
+            email: normalizedEmail
+        });
 
-        if (existingUser) {
+        if (existingEmail) {
             return res.status(400).json({
                 message: "Email already registered"
+            });
+        }
+
+        const existingLicense = await User.findOne({
+            licenseNumber: normalizedLicenseNumber
+        });
+
+        if (existingLicense) {
+            return res.status(400).json({
+                message: "Driving license number is already registered"
             });
         }
 
@@ -45,23 +76,32 @@ router.post("/register", async (req, res) => {
             name: normalizedName,
             email: normalizedEmail,
             phone: normalizedPhone,
-            password: hashedPassword
+            licenseNumber: normalizedLicenseNumber,
+            password: hashedPassword,
+            termsAccepted: true
         });
 
         res.status(201).json({
             message: "Registration successful",
             user: {
                 id: user._id,
-                name: user.name
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                licenseNumber: user.licenseNumber,
+                termsAccepted: user.termsAccepted
             }
         });
 
     } catch (error) {
+        console.error("Registration error:", error);
+
         res.status(500).json({
             message: error.message
         });
     }
 });
+
 
 router.post("/login", async (req, res) => {
     try {
@@ -70,7 +110,9 @@ router.post("/login", async (req, res) => {
             password
         } = req.body;
 
-        const normalizedEmail = String(email || "").trim().toLowerCase();
+        const normalizedEmail = String(email || "")
+            .trim()
+            .toLowerCase();
 
         if (!normalizedEmail || !password) {
             return res.status(400).json({
@@ -78,7 +120,9 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        const user = await User.findOne({ email: normalizedEmail });
+        const user = await User.findOne({
+            email: normalizedEmail
+        });
 
         if (!user) {
             return res.status(401).json({
@@ -114,15 +158,19 @@ router.post("/login", async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                phone: user.phone
+                phone: user.phone,
+                licenseNumber: user.licenseNumber
             }
         });
 
     } catch (error) {
+        console.error("Login error:", error);
+
         res.status(500).json({
             message: error.message
         });
     }
 });
+
 
 module.exports = router;

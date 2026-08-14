@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const phone = document.getElementById("phone").value.trim();
+        const licenseNumber = document.getElementById("licenseNumber").value.trim();
+        const termsAccepted = document.getElementById("termsAccepted").checked; 
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
 
@@ -35,6 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!phone) {
             messageNode.textContent = "Phone number is required.";
+            return;
+        }
+        if (!licenseNumber) {
+            messageNode.textContent = "Driving license number is required.";
+            return;
+}
+        if (!termsAccepted) {
+            messageNode.textContent = "You must accept the Terms & Conditions and Privacy Policy.";
             return;
         }
 
@@ -77,7 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     name,
                     email,
                     phone,
-                    password
+                    licenseNumber,
+                    password,
+                    termsAccepted
                 })
             });
 

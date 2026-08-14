@@ -15,8 +15,16 @@
             <input id="name" name="name" type="text" placeholder="Full name" required>
             <input id="email" name="email" type="email" placeholder="Email" required>
             <input id="phone" name="phone" type="tel" placeholder="Phone number" required>
+            <input id="licenseNumber" name="licenseNumber" type="text" placeholder="Driving license number" required>
             <input id="password" name="password" type="password" placeholder="Password" required>
             <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" required>
+            <label class="terms-checkbox">
+            <input id="termsAccepted" name="termsAccepted" type="checkbox" required>
+                <span>
+                    I agree to the <a href="#" target="_blank">Terms & Conditions</a>
+                    and Privacy Policy.
+                </span>
+            </label>
             <button class="btn btn-primary full" type="submit">Create Account</button>
             <p id="registerMessage" class="form-message"></p>
         </form>
